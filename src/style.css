@@ -1,0 +1,521 @@
+/* Import Google Font for a clean look */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+/* Basic setup and color variables */
+:root {
+    --primary-color: #2c3e50; /* Dark blue-gray */
+    --secondary-color: #34495e; /* Lighter shade for contrast */
+    --accent-color: #e74c3c; /* Vibrant red for accents */
+    --text-color: #ecf0f1; /* Off-white for readability */
+    --star-color: gold;
+}
+
+/* Global styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    margin: 0;
+    line-height: 1.6;
+}
+
+.container {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Navbar and Search Bar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: var(--secondary-color);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.logo {
+    font-weight: 600;
+    font-size: 1.5rem;
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.search-bar {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.search-bar input {
+    background: transparent;
+    border: 1px solid var(--text-color);
+    color: var(--text-color);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    outline: none;
+}
+
+.search-bar button {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.search-bar button:hover {
+    background-color: #c0392b;
+}
+
+/* Dynamic Content Sections */
+#content-area h2 {
+    margin-top: 2rem;
+    font-size: 1.8rem;
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 0.5rem;
+}
+
+.movie-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.movie-card {
+    background-color: var(--secondary-color);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+    aspect-ratio: 2 / 3; 
+}
+
+.movie-card:hover {
+    transform: translateY(-10px);
+}
+
+.movie-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-info {
+    padding: 1rem;
+    text-align: center;
+}
+
+.card-info h3 {
+    margin: 0 0 0.5rem;
+}
+
+/* NEW: Styles for the manual slider container and buttons */
+.slider-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.slide-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 1rem 0.5rem;
+    cursor: pointer;
+    z-index: 10;
+    font-size: 2rem;
+    transition: background-color 0.3s;
+    user-select: none;
+}
+
+.slide-button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+#prev-slide {
+    left: 0;
+}
+
+#next-slide {
+    right: 0;
+}
+
+/* Updated .movie-slider style for manual control */
+.movie-slider {
+    display: flex;
+    overflow: hidden; /* Hide cards outside the container */
+    gap: 1.5rem;
+    padding: 1rem 0;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    transition: transform 0.5s ease-in-out; /* Smooth transition */
+}
+
+.movie-slider::-webkit-scrollbar {
+    display: none;
+}
+
+.movie-slider .movie-card {
+    min-width: 200px;
+    flex-shrink: 0;
+}
+
+/* Styles for single movie details page */
+.movie-details-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+@media (min-width: 768px) {
+    .movie-details-container {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+}
+
+/* Styles for the advanced search form */
+.search-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.advanced-btn {
+    background-color: transparent;
+    border: 1px solid var(--text-color);
+    color: var(--text-color);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.advanced-btn:hover {
+    background-color: var(--secondary-color);
+}
+
+.advanced-search-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 1.5rem auto;
+    padding: 1rem;
+    background-color: var(--secondary-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.advanced-search-form.hidden {
+    display: none;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.advanced-search-form label {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.advanced-search-form select,
+.advanced-search-form input {
+    background-color: var(--primary-color);
+    border: 1px solid var(--text-color);
+    color: var(--text-color);
+    padding: 0.5rem;
+    border-radius: 5px;
+}
+
+/* Hides the spinner buttons on number inputs */
+.advanced-search-form input[type="number"]::-webkit-inner-spin-button,
+.advanced-search-form input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.advanced-search-form input[type="number"] {
+    appearance: textfield;
+}
+
+.advanced-search-form button {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.advanced-search-form button:hover {
+    background-color: #c0392b;
+}
+
+
+.details-poster {
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.details-content {
+    flex: 1;
+}
+
+.movie-title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.user-reviews-section {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Review Form */
+.review-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.review-form textarea {
+    background-color: var(--secondary-color);
+    border: 1px solid var(--text-color);
+    color: var(--text-color);
+    padding: 0.8rem;
+    border-radius: 5px;
+    resize: vertical;
+    min-height: 100px;
+}
+
+.rating-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Interactive Star Rating */
+.rating-stars {
+    display: flex;
+}
+
+.rating-stars .star {
+    font-size: 1.5rem;
+    color: #555; 
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.rating-stars .star.active {
+    color: var(--star-color);
+}
+
+/* Submit Review Button */
+.review-form button[type="submit"] {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.review-form button[type="submit"]:hover {
+    background-color: #c0392b;
+}
+
+/* Displayed Reviews */
+.reviews-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.review-item {
+    background-color: var(--secondary-color);
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.rating-display .star-display {
+    font-size: 1.2rem;
+    color: #555;
+}
+
+.rating-display .star-display.active {
+    color: var(--star-color);
+}
+
+.review-text {
+    margin: 0;
+}
+
+.no-reviews {
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Back button */
+.back-btn {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-bottom: 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.back-btn:hover {
+    background-color: #4f6a83;
+}
+
+/* Loading spinner styles */
+.loading-spinner {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    border: 5px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--accent-color);
+    /* Updated animation to include float */
+    animation: spin 1s ease-in-out infinite, float 1.5s ease-in-out infinite;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg) translate(-50%, -50%);
+    }
+}
+/* New keyframes for the floating effect */
+@keyframes float {
+    0%, 100% { transform: translateY(-50%) translateX(-50%); }
+    50% { transform: translateY(-60px) translateX(-50%); }
+}
+
+/* Not found/error page styles */
+.not-found,
+.error-message {
+    text-align: center;
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin: 5rem 0;
+}
+
+.not-found::before,
+.error-message::before {
+    content: '⚠️';
+    display: block;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.not-found a {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+/* Movie Card Fallback Icon Styles */
+.movie-card.no-image {
+    background-color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+}
+
+.movie-card.no-image .fa-film {
+    font-size: 4rem;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+}
+
+/* Additional movie details styles */
+.details-content p strong {
+    color: var(--accent-color);
+}
+.details-content ul {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+}
+.details-content ul li {
+    background-color: #3b5065;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    display: inline-block;
+    margin: 0.25rem;
+    font-size: 0.9rem;
+}
+
+/* Pagination styles */
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem 0 3rem;
+    flex-wrap: wrap;
+}
+
+.pagination-container button,
+.pagination-container .page-number {
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    border: none;
+    padding: 0.75rem 1.25rem;
+    margin: 0 0.5rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    font-size: 1rem;
+}
+
+.pagination-container button:hover:not(:disabled) {
+    background-color: #4f6a83;
+}
+
+.pagination-container button:disabled {
+    background-color: #3b5065;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.pagination-container .page-number {
+    background-color: var(--accent-color);
+    cursor: default;
+}
+
